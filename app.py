@@ -33,7 +33,7 @@ with open('disease_info.json', 'r') as f:
     disease_info = json.load(f)
     
 # Ruta del modelo
-MODEL_PATH = 'models/modelo_DEP 94.keras'
+MODEL_PATH = 'models/modelo_DEP94.keras'
 model = tf.keras.models.load_model(MODEL_PATH)
 
 def preprocess_image(image: Image.Image):
@@ -80,4 +80,4 @@ async def analyze_image(file: UploadFile = File(...)):
         
     except Exception as e: 
         print(f"Error: {str(e)}") 
-        return {"error": str(e)}
+        return {"error": str(e)} 

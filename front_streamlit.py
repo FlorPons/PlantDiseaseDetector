@@ -23,14 +23,16 @@ image_load = st.file_uploader("📥Arrastra y suelta tu imagen aquí o haz clic 
 
 if image_load is not None:
     # Mostrar la imagen cargada
-    st.image(image_load, caption="Imagen subida", use_column_width=True)
+    st.image(image_load, caption="Imagen subida", use_container_width=True)
 
 if st.button('Analizar imagen'):
     if image_load:
-        # Convertir la imagen cargada en un formato adecuado para enviar a la API
-        image = Image.open(image_load)
-        img_byte_arr = io.BytesIO()
-        image.save(img_byte_arr, format='PNG')
+        # Mostrar la imagen cargada 
+        image = Image.open(image_load).convert('RGB') # Asegurar de que está en formato RGB 
+        
+        # Convertir la imagen a bytes 
+        img_byte_arr = io.BytesIO() 
+        image.save(img_byte_arr, format='PNG') 
         img_byte_arr = img_byte_arr.getvalue()
 
         # Preparar los datos para enviar a la API (imagen en formato bytes)
@@ -41,8 +43,8 @@ if st.button('Analizar imagen'):
             time.sleep(2)  # Espera de 2 segundos para simular procesamiento
             try:
                 response = requests.post(API_URL, files=files) 
-                response.raise_for_status() # Lanza un error para respuestas no exitosas results = 
-                response.json()
+                response.raise_for_status() # Lanza un error para respuestas no exitosas 
+                results= response.json()
                 
                 # Extraer los datos de la respuesta 
                 class_predicted_number = results.get('prediction') 
