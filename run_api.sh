@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Iniciar Streamlit  
 streamlit run front_streamlit.py --server.port=8534 --server.headless=True &  
